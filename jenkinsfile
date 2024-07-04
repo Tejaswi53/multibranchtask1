@@ -5,6 +5,7 @@ pipeline{
             steps {
                 sh '''
                     echo "repo cloned successfully"
+                    echo "Tejaswi"
                 '''    
             }
         }
