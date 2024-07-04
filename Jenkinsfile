@@ -1,15 +1,21 @@
 pipeline{
     agent any
     stages {
-        stage('git clone') {
+        stage('master branch') {
+            when {
+                branch 'main'
+            }
             steps {
                 sh '''
-                    echo "cloning the repo from feature1 branch"
+                    echo "Build artifacts from master branch"
         
                 '''    
             }
         }
-        stage('build') {
+        stage('feature1 branch') {
+            when {
+                branch 'feature1'
+            }
             steps {
                 sh '''
                     echo "build artifacts from the feature1 branch"
