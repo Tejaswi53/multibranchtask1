@@ -1,25 +1,34 @@
-pipeline{
-    agent any
+pipeline {
+    agent any 
     stages {
-        stage('master branch') {
-            when {
-                branch 'main'
+        stage ('code checkout') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Tejaswi53/multibranchtask1.git']])
             }
+            
+        }
+        stage ('unit testing') {
             steps {
                 sh '''
-                    echo "Build artifacts from master branch"
-        
-                '''    
+                    echo "unit testing"
+                '''
             }
         }
-        stage('feature1 branch') {
+        stage ('code analysis') {
+            steps {
+                sh '''
+                    echo "code analysis"
+                '''
+            }
+        }
+        stage ('deployement') {
             when {
-                branch 'feature1'
+                branch 'develop'
             }
             steps {
                 sh '''
-                    echo "build artifacts from the feature1 branch"
-                '''    
+                    echo "deployement"
+                '''
             }
         }
     }
